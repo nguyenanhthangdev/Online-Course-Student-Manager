@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-main}">
+<body>
+	<div layout:fragment="content">
+		<div class="row g-3 mb-4 align-items-center justify-content-between">
+			<div class="col-auto">
+				<h1 class="app-page-title mb-0">THÊM SINH VIÊN</h1>
+			</div>
+			<div class="col-auto">
+				<div class="page-utilities">
+					<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+						<div class="col-auto">						    
+							<button type="submit" class="btn app-btn-secondary" form="add-student-form">
+                                Thêm sinh viên
+                            </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="app-card p-4">
+            <form action="/students/save-student" th:object="${student}" method="POST" id="add-student-form">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Họ & Tên</label>
+                    <input type="text" class="form-control" th:field="*{name}" id="name">
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" id="email">
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Ngày/Tháng/Năm Sinh</label>
+                    <input type="date" class="form-control" th:field="*{dob}" id="dob">
+                    <div th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" style="color:red"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Giới Tính</label>
+                    <select class="form-control" th:field="*{gender}" id="gender" name="gender">
+                        <option value="">-- Chọn giới tính --</option>
+                        <option value="nam">Nam</option>
+                        <option value="nữ">Nữ</option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" style="color:red"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="createAt" class="form-label">Ngày Đăng Kí</label>
+                    <input type="date" class="form-control" th:field="*{createAt}" id="createAt">
+                    <div th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}" style="color:red"></div>
+                </div>
+            </form>
+        </div>
+	</div>
+</body>
+</html>

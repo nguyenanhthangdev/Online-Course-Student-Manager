@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-main}">
+<body>
+	<div layout:fragment="content">
+		<div class="row g-3 mb-4 align-items-center justify-content-between">
+			<div class="col-auto">
+				<h1 class="app-page-title mb-0">THAY ĐỔI THÔNG TIN BẢN GHI ĐĂNG KÍ</h1>
+			</div>
+			<div class="col-auto">
+				<div class="page-utilities">
+					<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+						<div class="col-auto">						    
+							<button type="submit" class="btn app-btn-secondary" form="edit-enrollment-form">
+                                Lưu thay đổi
+                            </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="app-card p-4">
+            <form action="/enrollments/update-enrollment" th:object="${enrollment}" method="POST" id="edit-enrollment-form">
+                <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger">
+                    <p th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="mb-0 pb-0"></p>
+                </div>
+                <input type="hidden" name="id" th:value="${enrollment.id}">
+                <div class="mb-3">
+                    <label for="student" class="form-label">Sinh Viên</label>
+                    <select class="form-control" th:field="*{student}" id="student" name="student">
+                        <option value="">-- Chọn sinh viên --</option>
+                        <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.name + ' - ID: ' + student.id}"></option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('student')}" th:errors="*{student}" style="color:red"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="course" class="form-label">Khóa Học</label>
+                    <select class="form-control" th:field="*{course}" id="course" name="course">
+                        <option value="">-- Chọn khóa học --</option>
+                        <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name}"></option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('course')}" th:errors="*{course}" style="color:red"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="enrolledAt" class="form-label">Ngày Đăng Kí</label>
+                    <input type="date" class="form-control" th:field="*{enrolledAt}" id="enrolledAt" name="enrollment">
+                    <div th:if="${#fields.hasErrors('enrolledAt')}" th:errors="*{enrolledAt}" style="color:red"></div>
+                </div>
+            </form>
+        </div>
+	</div>
+</body>
+</html>

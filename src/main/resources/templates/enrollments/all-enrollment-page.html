@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-main}">
+<body>
+	<div layout:fragment="content">
+		<div class="row g-3 mb-4 align-items-center justify-content-between">
+			<div class="col-auto">
+				<h1 class="app-page-title mb-0">DANH SÁCH ĐĂNG KÍ</h1>
+			</div>
+			<div class="col-auto">
+				<div class="page-utilities">
+					<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+						<div class="col-auto">
+							<select class="form-control" style="font-size: 14px;" onchange="redirectToStudent(this)">
+								<option value="">-- Chọn sinh viên --</option>
+								<option th:each="student : ${students}"
+										th:value="${student.id}"
+										th:text="${student.name + ' - ID: ' + student.id}">
+								</option>
+							</select>
+						</div>
+						<div class="col-auto">
+							<select class="form-control" style="font-size: 14px;" onchange="redirectToCourse(this)">
+								<option value="">-- Chọn khóa học --</option>
+								<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name}"></option>
+							</select>
+						</div>
+						<div class="col-auto">						    
+							<a class="btn app-btn-secondary" href="/enrollments/add-enrollment">
+								Đăng kí khóa học
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${message}" class="alert alert-success">
+			<p class="mb-0" th:text="${message}"></p>
+		</div>
+
+		<div th:if="${error}" class="alert alert-danger">
+			<p class="mb-0" th:text="${error}"></p>
+		</div>
+		
+		<div th:if="${enrollments.size() != 0}">
+			<div class="tab-content" id="orders-table-tab-content">
+				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					<div class="app-card app-card-orders-table shadow-sm mb-5">
+						<div class="app-card-body">
+							<div class="table-responsive">
+								<table class="table app-table-hover mb-0 text-left">
+									<thead>
+										<tr>
+                                            <th class="cell">Mã Sinh Viên</th>
+											<th class="cell">Sinh Viên</th>
+											<th class="cell">Khóa Học</th>
+											<th class="cell">Ngày Đăng Kí</th>
+											<th class="cell">Sửa</th>
+											<th class="cell">Xóa</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="enrollment : ${enrollments}">
+                                            <td class="cell"><span th:text="${enrollment.student.id}"></span></td>
+											<td class="cell"><span th:text="${enrollment.student.name}"></span></td>
+											<td class="cell"><span th:text="${enrollment.course.name}"></span></td>
+											<td class="cell"><span th:text="${enrollment.enrolledAt}"></span></td>
+											<td class="cell">
+												<a th:href="@{'/enrollments/edit-enrollment/' + ${enrollment.id}}">
+													<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="currentColor" d="M15.748 2.947a2 2 0 0 1 2.828 0l2.475 2.475a2 2 0 0 1 0 2.829L9.158 20.144l-6.38 1.076l1.077-6.38L15.748 2.947Zm-.229 3.057l2.475 2.475l1.643-1.643l-2.475-2.474l-1.643 1.642Zm1.06 3.89l-2.474-2.475l-8.384 8.384l-.503 2.977l2.977-.502l8.385-8.385Z"/></svg>
+												</a>
+											</td>
+											<td class="cell">
+												<a href="#" th:attr="data-id=${enrollment.id}" onclick="confirmDeleteEnrollment(this)">
+													<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h4a1 1 0 1 1 0 2h-1.069l-.867 12.142A2 2 0 0 1 17.069 22H6.93a2 2 0 0 1-1.995-1.858L4.07 8H3a1 1 0 0 1 0-2h4V4zm2 2h6V4H9v2zM6.074 8l.857 12H17.07l.857-12H6.074zM10 10a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1z"/></svg>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:if="${enrollments.size() == 0}">
+			<p class="text-center mt-5">Danh sách sinh viên đang trống!</p>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>VN-ONLINE</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    
+    <!-- FontAwesome JS-->
+    <script defer th:src="@{/js/all.min.js}"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" th:href="@{/css/portal.css}"> 
+    <link rel="stylesheet" th:href="@{/css/styles-my.css}">
+
+</head> 
+
+<body class="app">   	
+    <header class="app-header fixed-top">	   	            
+        <div class="app-header-inner">  
+	        <div class="container-fluid py-2">
+		        <div class="app-header-content"> 
+				    <div class="col-auto">
+					    <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+						    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+					    </a>
+				    </div>
+	            </div>
+	        </div>
+        </div>
+        <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden"> 
+	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
+	        <div class="sidepanel-inner d-flex flex-column">
+		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+		        <div class="app-branding">
+		            <a class="app-logo" href="/students"><img th:src="@{/images/logo/logo.jpg}" class="logo-icon me-2" alt="logo"><span class="logo-text color-main">VN-ONLINE</span></a>
+		        </div>  
+			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+					    <li th:classappend="'student' == ${active} ? 'active-my' : ''">
+					        <a class="nav-link" href="/students">
+						        <span class="nav-icon">
+						        	<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7ZM6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0ZM3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3v-3Zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3H8Z"/></svg>
+						        </span>
+		                        <span>SINH VIÊN</span>
+					        </a>
+					    </li>
+						<li th:classappend="'course' == ${active} ? 'active-my' : ''">
+					        <a class="nav-link" href="/courses">
+						        <span class="nav-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6a4 4 0 0 1 4-4h14v20H7a4 4 0 0 1-4-4V6Zm2 8.535A3.982 3.982 0 0 1 7 14h12V4H7a2 2 0 0 0-2 2v8.535ZM19 16H7a2 2 0 1 0 0 4h12v-4ZM10 6h7v2h-7V6Z"/></svg>
+						        </span>
+		                        <span class="nav-link-text">KHÓA HỌC</span>
+					        </a>
+					    </li>
+						<li>
+					        <a class="nav-link" href="/enrollments" th:classappend="'enrollment' == ${active} ? 'active-my' : ''">
+						        <span class="nav-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor"><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10"/><path d="M10 16V9a1 1 0 0 1 1-1h1.75a2.25 2.25 0 0 1 0 4.5H10m3 0l1.5 3.5"/></g></svg>
+								</span>
+		                        <span class="nav-link-text">ĐĂNG KÍ KHÓA HỌC</span>
+					        </a>
+					    </li>
+				    </ul>
+			    </nav>
+	        </div>
+	    </div>
+    </header>
+    
+    <div class="app-wrapper">
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+				
+				<div layout:fragment="content"></div>
+			    
+		    </div>
+	    </div>
+	    
+    </div>   					
+
+	<!-- Sweetalert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/js/sweetalert-custom.js}"></script>
+
+	<!-- Javascript My -->
+	<script th:src="@{/js/javascript-my.js}"></script>
+ 
+    <!-- Javascript -->          
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>  
+    
+    
+    <!-- Page Specific JS -->
+    <script th:src="@{/js/app.js}"></script> 
+
+</body>
+</html> 
+
