@@ -55,7 +55,12 @@ cd online-course-student-manager
 
 ## Chạy app:
 
+```bash
 ./mvnw spring-boot:run
+```
 
 Truy cập trình duyệt tại:
+
+```bash
 http://localhost:8080/students
+```
