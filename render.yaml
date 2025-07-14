@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: online-course-student-manager
+    env: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://sql12.freesqldatabase.com:3306/sql12789874
+      - key: SPRING_DATASOURCE_USERNAME
+        value: sql12789874
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: gJun4CbMDL
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
